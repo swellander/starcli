@@ -27,19 +27,26 @@ def list_layout(repos):
             end="  ",
         )
 
-        stats = (
+        stats = str(
             str(repo["stargazers_count"])
-            + ":star:, "
+            + "s, "
             + str(repo["forks_count"])
-            + ":fork_and_knife:, "
+            + "f, "
             + str(repo["watchers_count"])
-            + ":eyes:"
+            + "w"
         )
+        print(stats)
+        stats_len = len(stats)
 
-        if len(repo["full_name"] + stats) > len(separator + "   "):
+        stats.replace("1", ":star:")
+        stats.replace("f", ":fork_and_knife:")
+        stats.replace("w", ":eyes:")
+        print(stats)
+
+        if (len(repo["full_name"]) + stats_len) > len(separator + "  "):
             print()
             console.print(
-                " " * ((side_width) + (len(separator) - len(stats))), stats, end="\n\n"
+                " " * ((side_width) + (len(separator) - stats_len)), stats, end="\n\n"
             )
         else:
             console.print(stats, end="\n\n")
